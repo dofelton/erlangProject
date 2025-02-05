@@ -12,9 +12,20 @@ get_number() ->
     end.
 
 % function that takes the numbers and operation and calculates result
-calculate() ->
+calculate(Num1, Num2, "+") -> Num1+Num2;
+calculate(Num1, Num2, "-") -> Num1-Num2;
+calculate(Num1, Num2, "*") -> Num1*Num2;
 
-end.
+% Error handling for division by 0
+calculate(Num1, Num2, "/") when Num2 =/= 0 -> Num1/Num2;
+calculate(_, 0, "/") ->
+    io:format("Error: Division by zero is not allowed!~n"),
+    undefined;
+
+% clause to handle invalid operators
+calculate(_,_,_) ->
+    io:format("Invalid operation. ~n"),
+    undefined.
 
 % main function to run the program
 main() ->
@@ -30,5 +41,8 @@ main() ->
 % prompt user for a number, read input and assign it to a variable
     Num2 = get_number(),
 
-% output results to the screen
-    io:format("~p, ~p, ~p~n", [Num1, Operation, Num2]).
+% calculate and output results
+    case calculate(Num1, Num2, Operation) of 
+        undefined -> io:format("Calculation failed due to invalid input.~n");
+        Result -> io:format("~p ~s ~p = ~p~n", [Num1, Operation, Num2, Result])
+    end.

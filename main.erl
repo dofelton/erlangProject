@@ -1,9 +1,9 @@
 -module(main).
--export([main/0, get_number/0]).
+-export([main/0]).
 
 % function to capture a user input number
 get_number() ->
-    io:format("Enter a number: "),
+    io:format("Enter a number: ~n"),
     case io:fread("", "~d") of
         {ok, [Num]} -> Num; 
         _ ->
@@ -45,4 +45,18 @@ main() ->
     case calculate(Num1, Num2, Operation) of 
         undefined -> io:format("Calculation failed due to invalid input.~n");
         Result -> io:format("~p ~s ~p = ~p~n", [Num1, Operation, Num2, Result])
+    end,
+% get user input to run the calculator again or quit
+    loop().
+
+% Function to run calculator again or quit the program based on user input
+loop() ->
+    io:format("Would you like to run the Calculator again?(y or n): "),
+    Input = string:trim(io:get_line("")),
+    case Input of 
+        "y" -> main();
+        "n" -> io:format("Thank you and have a great day!~n");
+        _ -> 
+            io:format("Invalid entry, please choose y or n.~n"),
+            loop()
     end.

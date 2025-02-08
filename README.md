@@ -2,7 +2,7 @@
 This is an initial forey into Erlang. I wrote a simple calculator program that will accept user input, calculate the desired functions, and output the solution.
 
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/ej29BRvUiDI))
 
 # Development Environment
 
